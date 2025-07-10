@@ -1,4 +1,4 @@
-import mongoose, { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
@@ -57,7 +57,7 @@ const courseSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    rquired: true,
+    required: true,
   },
 
   imageUrl: {
@@ -66,16 +66,22 @@ const courseSchema = new mongoose.Schema({
   },
 
   createrId: {
-    type: ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Admin",
+    required: true,
   },
 });
 
 const purchaseSchema = new mongoose.Schema({
   userId: {
-    type: ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
   courseId: {
-    type: ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Course",
+    required: true,
   },
 });
 
