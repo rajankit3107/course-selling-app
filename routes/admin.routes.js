@@ -14,25 +14,25 @@ adminRouter.post("/signin", (req, res) => {
   });
 });
 
-adminRouter.post("/course", (req, res) => {
+adminRouter.post("/", (req, res) => {
   res.json({
     message: `created course`,
   });
 });
 
-adminRouter.put("/course", (req, res) => {
+adminRouter.put("/", (req, res) => {
   res.json({
     message: `updated course`,
   });
 });
 
-adminRouter.get("/course/bulk", (req, res) => {
+adminRouter.get("/bulk", (req, res) => {
   res.json({
     message: `all the course course`,
   });
 });
 
-adminRouter.delete("/course", (req, res) => {
+adminRouter.delete("/", (req, res) => {
   res.json({
     message: `deleted course course`,
   });

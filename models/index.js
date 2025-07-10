@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema(
   {
@@ -85,7 +86,13 @@ const purchaseSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model("User", userSchema);
-const Admin = mongoose.model("Admin", adminSchema);
-const Course = mongoose.model("Course", courseSchema);
-const Purchase = mongoose.model("Purchase", purchaseSchema);
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
+
+export const User = mongoose.model("User", userSchema);
+export const Admin = mongoose.model("Admin", adminSchema);
+export const Course = mongoose.model("Course", courseSchema);
+export const Purchase = mongoose.model("Purchase", purchaseSchema);
