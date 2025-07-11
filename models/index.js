@@ -92,6 +92,12 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+adminSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
+
 export const User = mongoose.model("User", userSchema);
 export const Admin = mongoose.model("Admin", adminSchema);
 export const Course = mongoose.model("Course", courseSchema);
