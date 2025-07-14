@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { Admin } from "../models/index.js";
+import { Admin, Course } from "../models/index.js";
 import { signupSchema } from "../validators/index.js";
 import { signinSchema } from "../validators/index.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import adminMiddleware from "../middlewares/admin.middleware.js";
 
 const adminRouter = Router();
 
@@ -80,7 +81,7 @@ adminRouter.post("/signin", async (req, res) => {
       {
         id: admin._id,
       },
-      process.env.JWT_ADMIN_PASSOWRD
+      process.env.JWT_ADMIN_PASSWORD
     );
     //   localStorage.setItem(token);
     res.json({
@@ -97,9 +98,24 @@ adminRouter.post("/signin", async (req, res) => {
   }
 });
 
-adminRouter.post("/", (req, res) => {
+adminRouter.post("/course", adminMiddleware, async (req, res) => {
+  const adminId = req.userId;
+
+  if (!adminId) res.json({ message: `you are not allowed to do that` });
+
+  const { title, description, imageUrl, price } = req.body;
+
+  const course = await Course.create({
+    title: title,
+    description: description,
+    imageUrl: imageUrl,
+    price: price,
+    createrId: adminId,
+  });
+
   res.json({
-    message: `created course`,
+    message: `course created`,
+    courseId: course._id,
   });
 });
 

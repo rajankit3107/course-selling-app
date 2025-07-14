@@ -14,3 +14,5 @@ function adminMiddleware(req, res, next) {
     res.status(403).json({ message: `you are not signed in` });
   }
 }
+
+export default adminMiddleware;
