@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
+//user-schema
 const userSchema = new mongoose.Schema(
   {
     email: {
@@ -26,6 +27,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+//admin-schema
 const adminSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -47,6 +49,7 @@ const adminSchema = new mongoose.Schema({
   },
 });
 
+//course-schema
 const courseSchema = new mongoose.Schema({
   title: {
     type: String,

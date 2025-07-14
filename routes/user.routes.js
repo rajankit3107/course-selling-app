@@ -85,7 +85,7 @@ userRouter.post("/signin", async (req, res) => {
       {
         id: user._id,
       },
-      process.env.JWT_SECRET
+      process.env.JWT_USER_PASSWORD
     );
     //   localStorage.setItem(token);
     res.json({

@@ -80,7 +80,7 @@ adminRouter.post("/signin", async (req, res) => {
       {
         id: admin._id,
       },
-      process.env.JWT_SECRET
+      process.env.JWT_ADMIN_PASSOWRD
     );
     //   localStorage.setItem(token);
     res.json({
